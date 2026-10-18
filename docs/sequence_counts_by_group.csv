@@ -1,0 +1,19 @@
+﻿group_type,group,total_sequences,pycn_marker_positive,rust_marker_positive,both_markers_positive
+overall,all,1029,1022,1022,1021
+season,2023,385,383,383,382
+season,2024,644,639,639,639
+genotype,ARINA,98,97,98,97
+genotype,AUBUSSON,108,108,108,108
+genotype,BORNEO,120,120,120,120
+genotype,BRANDO,97,96,96,96
+genotype,CH CLARO,28,28,28,28
+genotype,DIAVEL,91,89,89,89
+genotype,FORNO,109,109,108,108
+genotype,GULLIVER,90,90,90,90
+genotype,KOBRA PLUS,30,29,29,29
+genotype,OCTET,10,10,10,10
+genotype,POTENZIAL,50,50,50,50
+genotype,RAISON,98,98,98,98
+genotype,SIMANO,10,10,10,10
+genotype,TAIFUN,80,78,78,78
+genotype,ZEBEDEE,10,10,10,10
