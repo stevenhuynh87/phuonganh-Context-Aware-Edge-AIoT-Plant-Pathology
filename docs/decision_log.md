@@ -94,3 +94,19 @@
 - **Experiment:** Review the ETH metadata and index, weather analysis, Literature Matrix, SYMPATHIQUE smoke test, test results, dataset audit, sequence statistics, repository status, and Definition of Done checklist.
 - **Result:** The core implementation and preliminary validation activities were completed, but S01 did not meet all closeout requirements. K1 remained partially verified because the local dataset counts differed from the published counts and only a small subset of image/mask paths was locally resolved. K2 remained unverified because authoritative weather-timezone information and disease labels were unresolved. K3 was not achieved on the previously recorded hardware configuration, and the fallback plan required explicit confirmation. The SYMPATHIQUE test verified sample loading only, not the full end-to-end pipeline.
 - **Action:** Record S01 as `PARTIALLY COMPLETE / BLOCKED`. Preserve the verified results, document the unresolved items, and complete the required validation and repository checks before declaring S01 fully closed. Do not mark K1–K3 as PASS without sufficient evidence or an explicitly accepted alternative where permitted by the roadmap.
+
+## [2026-10-18] Post-Commit Validation and Experiment Provenance
+
+- **Hypothesis:** The S01 implementation and data-checking results must be traceable to a specific code revision and execution configuration.
+- **Experiment:** After committing the S01 deliverables, run `python -m pytest -q`, `python -m data.eth_index`, and `python -m data.weather` in the project environment.
+- **Configuration:** Windows PowerShell; Python 3.14.6; pandas 3.0.6; pyreadr 0.5.7; pytest 9.1.1; dataset root `datasets/eth/`; default command parameters.
+- **Result:**
+  - Tests: 4 passed in 12.90 seconds.
+  - ETH index: 11,768 rows × 26 columns; 1,029 unique sequences; 11,768 indexed image paths/file IDs.
+  - Local image/mask availability: 14 JPG images and 14 PNG masks resolved.
+  - Weather loader: 11,570 hourly rows × 3 columns (`timestamp`, `T`, `RH`); no missing T or RH values in the returned data.
+- **Random Seed:** N/A. No randomized data split, model training, or stochastic experiment was performed in these recorded runs.
+- **Validation Commit:** `88f8e05cda205a0bf987cc7537614bbcccee8466`.
+- **Decision:** Accept these outputs as recorded evidence that the current index, weather loader, and four-test suite executed successfully. Do not interpret these results as proof that all S01 feasibility gates passed.
+- **Remaining Issues:** The published-versus-local dataset count discrepancy remains unresolved; authoritative pathogen/severity labels and weather timezone remain unverified; K3 remains unmet under the previously recorded hardware constraints.
+- **Action:** Keep the validation record. Continue resolving the outstanding evidence requirements before declaring S01 fully closed.

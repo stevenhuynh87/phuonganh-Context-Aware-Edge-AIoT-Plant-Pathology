@@ -159,3 +159,83 @@ These are values reported by Windows, not a specialist VRAM benchmark; neverthel
 
 - Dataset paper: Anderegg & McDonald (2026), *High-Resolution Leaf Image Sequences with Geometric Alignment for Dynamic Phenotyping of Foliar Diseases*, Scientific Data 13, 247. https://doi.org/10.1038/s41597-026-06567-y
 - Author toolkit repository: https://github.com/and-jonas/sympathique-wheat
+
+## Reproducibility Record — Post-Commit Validation
+
+**Validation snapshot:** 2026-10-18
+**Validation commit:** `88f8e05cda205a0bf987cc7537614bbcccee8466`
+**Environment:** Windows PowerShell
+**Python version:** 3.14.6
+**Dataset root:** `datasets/eth/`
+**Random seed:** N/A — no randomized data split, model training, or stochastic experiment was performed.
+
+### 1. Test Results
+
+| Item | Recorded value |
+|---|---|
+| Command | `python -m pytest -q` |
+| Result | 4 passed |
+| Execution time | 12.90 seconds |
+| Code commit | `88f8e05cda205a0bf987cc7537614bbcccee8466` |
+
+### 2. ETH Index Results
+
+| Item | Recorded value |
+|---|---:|
+| Command | `python -m data.eth_index` |
+| Index shape | 11,768 rows × 26 columns |
+| Unique sequences | 1,029 |
+| Indexed image paths / file IDs | 11,768 |
+| Locally resolved JPG images | 14 / 11,768 |
+| Locally resolved PNG masks | 14 / 11,768 |
+| Severity labels | Unverified; left missing |
+| Pathogen labels | Unverified; left missing |
+
+The indexed image-path count does not represent the number of image files physically available locally. Only 14 JPG images and 14 matching PNG masks were resolved in the current local sample.
+
+### 3. Weather Loader Results
+
+| Item | Recorded value |
+|---|---|
+| Command | `python -m data.weather` |
+| Output shape | 11,570 rows × 3 columns |
+| Output columns | `timestamp`, `T`, `RH` |
+| First timestamp | 2022-11-08 15:00:00 |
+| Last timestamp | 2024-07-19 14:00:00 |
+| Missing temperature values | 0 |
+| Missing relative humidity values | 0 |
+| Daily summary rows | Excluded from the hourly dataset |
+| Weather timezone | Not authoritatively verified |
+
+### 4. Reproducibility Configuration
+
+- Dataset root: `datasets/eth/`.
+- Index command: `python -m data.eth_index`.
+- Weather command: `python -m data.weather`.
+- Test command: `python -m pytest -q`.
+- Random seed: N/A for the recorded operations because no randomized split or model training was performed.
+- Validation commit: `88f8e05cda205a0bf987cc7537614bbcccee8466`.
+
+### Python Environment and Dependencies
+
+| Component | Version |
+|---|---|
+| Operating environment | Windows PowerShell |
+| Python | 3.14.6 |
+| pandas | 3.0.6 |
+| pyreadr | 0.5.7 |
+| pytest | 9.1.1 |
+
+**Environment note:** These are the versions observed in the local environment
+during the S01 validation. They record the runtime configuration and do not
+imply that all dependencies are pinned in a lockfile.
+
+### 5. Remaining Limitations
+
+- The local index contains 1,029 sequences and 11,768 file IDs, compared with 1,032 sequences and 12,520 RGB images reported in the publication. The discrepancy remains unresolved.
+- Only a small local image/mask sample is available.
+- Authoritative pathogen and severity labels remain unverified.
+- Weather timezone interpretation and sequence-hour coverage require further verification.
+- K3 remains unmet under the previously recorded local hardware constraints.
+
+These validation results do not establish that all S01 Definition of Done requirements or feasibility gates have passed.
